@@ -1,6 +1,9 @@
 from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
+from django.db.models import Q
+from rest_framework.pagination import PageNumberPagination
+
 
 from .models import Nft
 from .serializers import NftSerializer
@@ -9,8 +12,11 @@ from .serializers import NftSerializer
 @api_view(['GET'])
 def nfts(request):
     nft = Nft.objects.all()
-    serializer = NftSerializer(nft, many=True)
-    return Response(serializer.data)
+    paginator = PageNumberPagination()
+    paginator.page_size = 10
+    result_page = paginator.paginate_queryset(nft, request)
+    serializer = NftSerializer(result_page, many=True)
+    return paginator.get_paginated_response(serializer.data)
 
 @api_view(['POST'])
 def nft_uplode(request):
@@ -93,7 +99,6 @@ def nft_update(request, pk):
         print("ERROR --->", e)
         return Response({'details': f"{e}"},status=status.HTTP_204_NO_CONTENT)
 
-from django.db.models import Q
 
 @api_view(['GET'])
 def nft_search(request):
@@ -101,5 +106,8 @@ def nft_search(request):
     if query == None:
         query = " "
     nft = Nft.objects.filter(Q(title__icontains=query)|Q(tag1__icontains=query)|Q(tag2__icontains=query)|Q(tag3__icontains=query)|Q(tag4__icontains=query))
-    serializer = NftSerializer(nft, many=True)
-    return Response(serializer.data)
+    paginator = PageNumberPagination()
+    paginator.page_size = 10
+    result_page = paginator.paginate_queryset(nft, request)
+    serializer = NftSerializer(result_page, many=True)
+    return paginator.get_paginated_response(serializer.data)
