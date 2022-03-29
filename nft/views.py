@@ -11,12 +11,13 @@ from .serializers import NftSerializer
 # Create your views here.
 @api_view(['GET'])
 def nfts(request):
-    nft = Nft.objects.all()
+    nft = Nft.objects.filter(approved=True)
     paginator = PageNumberPagination()
     paginator.page_size = 10
     result_page = paginator.paginate_queryset(nft, request)
     serializer = NftSerializer(result_page, many=True)
     return paginator.get_paginated_response(serializer.data)
+
 
 @api_view(['POST'])
 def nft_uplode(request):
@@ -51,6 +52,8 @@ def nft_uplode(request):
     except:
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
+# all uploded nft of requested user
 @api_view(['GET'])
 def nft_requested_user(request):
     try:

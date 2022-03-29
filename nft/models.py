@@ -30,6 +30,8 @@ class Nft(models.Model):
     tag3 = models.CharField(max_length=20, null=True, blank=True)
     tag4 = models.CharField(max_length=20, null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
+    """ for privacy reason we have to verify the nft before showing to users """
+    approved = models.BooleanField(default=False, blank=True)
     id = models.UUIDField(default=uuid.uuid4, primary_key=True, unique=True, editable=False)
 
     def save(self, *args, **kwargs):
