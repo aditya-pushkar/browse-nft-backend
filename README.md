@@ -7,6 +7,7 @@
 <h2>FEATURES</h2>
 <ul>
     <li>Showcase your Nft to millions of people</li>
-    <li>Uplode the Nft and get rewarded in crypto</li>
+    <li>Everytime you uplode Nft you get rewarded in crypto </li>
+    <li>Meet with NFt enthusiastic's </li>
 </ul>
 
