@@ -19,7 +19,7 @@
 <i></i><br>
 ✅ Add verification of nft after uploaded by user<br>
 <i></i><br>
-⏳ Create wallet for giving out rewards who uplods the NFts<br>
+✅ Create wallet for giving out rewards who uplods the NFts<br>
 <i></i><br>
 ❌ User Profile
 <i></i><br>
